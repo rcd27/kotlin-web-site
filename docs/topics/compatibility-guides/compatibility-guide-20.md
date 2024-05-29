@@ -61,27 +61,255 @@ perspective
 > - 1.8.20: report a warning when a synthetic property setter has a projected parameter type in contravariant position making call-site argument types incompatible
 > - 2.0.0: raise the warning to an error
 
+### Correct mangling behavior for duplicate function names in a Java subclass
+
+> **Issue**: [KT-56545](https://youtrack.jetbrains.com/issue/KT-56545)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: behavioral
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: use the correct mangling behavior in function invocations. To revert to previous behaviour, use compiler option -XXLanguage:-MangleCallsToJavaMethodsWithValueClasses.
+
+### Correct type approximation algorithm for types with projections for type arguments
+
+> **Issue**: [KT-49404](https://youtrack.jetbrains.com/issue/KT-49404)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.8.20: report a warning on problematic calls
+> - 2.0.0: raise the warning to an error
+
+### Consistent behavior for properties when accessed before class initialization
+
+> **Issue**: [KT-56408](https://youtrack.jetbrains.com/issue/KT-56408)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: report an error when a property is accessed before initialization in the affected contexts 
+
+### Report error when there's ambiguity in imported classes with the same name
+
+> **Issue**: [KT-57750](https://youtrack.jetbrains.com/issue/KT-57750)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: report an error when resolving a class name that is present in several packages imported with a star import
+
+### Generate Kotlin lambdas via invokedynamic and LambdaMetafactory by default
+
+> **Issue**: [KT-45375](https://youtrack.jetbrains.com/issue/KT-45375)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: behavioral
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior
+
+### Forbid if condition with one branch when an expression is required
+
+> **Issue**: [KT-57871](https://youtrack.jetbrains.com/issue/KT-57871)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: report an error
+
+### Prohibit violation of self upper bounds by passing a star-projection of a generic type
+
+> **Issue**: [KT-61718](https://youtrack.jetbrains.com/issue/KT-61718)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: report an error when self upper bounds are violated by passing a star-projection of a generic type
+
+### Prohibit private inline functions from having a return type that contains an anonymous type
+
+> **Issue**: [KT-54862](https://youtrack.jetbrains.com/issue/KT-54862)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.9.0: report a warning on private inline functions if the inferred return type contains an anonymous type
+> - 2.0.0: approximate return type of such private inline functions to a supertype
+
+### Change overload resolution behavior to prioritize function calls over invoke conventions
+
+> **Issue**: [KT-37592](https://youtrack.jetbrains.com/issue/KT-37592)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: behavioral
+>
+> **Short summary**:
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: change overload resolution behavior to consistently prioritize function calls over invoke conventions
+
+### Report error when an inherited member conflict occurs in supertypes from binary dependencies
+
+> **Issue**: [KT-51194](https://youtrack.jetbrains.com/issue/KT-51194)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.7.0: report a warning CONFLICTING_INHERITED_MEMBERS_WARNING on declarations where inherited member conflict has occurred in the supertype from binary dependency
+> - 2.0.0: raise the warning to an error: CONFLICTING_INHERITED_MEMBERS
+
+### Ignore @UnsafeVariance annotations when reporting errors about type mismatch in contravariant parameters
+
+> **Issue**: [KT-57609](https://youtrack.jetbrains.com/issue/KT-57609)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior
+
+### Report error for out-of-call references to a companion object's member
+
+> **Issue**: [KT-54316](https://youtrack.jetbrains.com/issue/KT-54316)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.8.20: report a warning on a companion object function reference type inferred as an unbound reference
+> - 2.0.0: change the behavior so that companion object function references are inferred as bound references in all usage contexts
+
+### Require Opt in when calling a constructor that has parameter types that require an Opt in
+
+> **Issue**: [KT-33917](https://youtrack.jetbrains.com/issue/KT-33917)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.3.0: report a warning on calls to own members of anonymous objects, returned from private inline functions
+> - 2.0.0: approximate return type of such private inline functions to a supertype and don't resolve calls to anonymous object members.
+
+### Report error for an unsound smart cast after a while-loop break
+
+> **Issue**: [KT-22379](https://youtrack.jetbrains.com/issue/KT-22379)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior
+>
+> The old behavior can be restored by switching to language version 1.9.
+
+### Report error when a variable of an intersection type is assigned a value that is not a subtype of that intersection type
+
+> **Issue**: [KT-53752](https://youtrack.jetbrains.com/issue/KT-53752)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: report an error when a variable having an intersection type is assigned a value that is not a subtype of that intersection type
+
+### Deprecate SAM constructor usages which require OptIn without annotation
+
+> **Issue**: [KT-52628](https://youtrack.jetbrains.com/issue/KT-52628)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.7.20: report a warning for OptIn usages via SAM constructor, the warning in this case is never promoted to an error
+> - 2.0.0:  raise the warning to an error in K2 compiler for OptIn usages via SAM constructor (or keep reporting the warning if OptIn marker severity is a warning)
+
+### Deprecate upper bound violation in typealias constructors
+
+> **Issue**: [KT-54066](https://youtrack.jetbrains.com/issue/KT-54066)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.8.0: introduce a warning, this warning never becomes an error
+> - 2.0.0: raise the warning to an error in K2 compiler
+
+### Make the real type of a destructuring variable consistent with the explicit type when specified
+
+> **Issue**: [KT-57011](https://youtrack.jetbrains.com/issue/KT-57011)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior
+
+### Title
+
+> **Issue**: [KT-NNNNN](https://youtrack.jetbrains.com/issue/KT-NNNNN)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Short summary**:
+>
+> **Deprecation cycle**:
+>
+> - 1.6.20: report a warning
+> - 1.8.0: raise the warning to an error
+
 ### Other language changes {initial-collapse-state="expanded"}
 
 | Issue ID                                                  | Title                                                                                                                          |
 |-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| [KT-57871](https://youtrack.jetbrains.com/issue/KT-57871) | K1/K2 inconsistency on if-conditional without else-branch in parenthesis                                                       |
-| [KT-61718](https://youtrack.jetbrains.com/issue/KT-61718) | Forbid unsound code with self upper bounds and captured types                                                                  |
-| [KT-54862](https://youtrack.jetbrains.com/issue/KT-54862) | Anonymous type can be exposed from private inline function from type argument                                                  |
 | [KT-37592](https://youtrack.jetbrains.com/issue/KT-37592) | Property invoke of a functional type with receiver is preferred over extension function invoke                                 |
-| [KT-51194](https://youtrack.jetbrains.com/issue/KT-51194) | False negative CONFLICTING_INHERITED_MEMBERS when dependency class contained in two different versions of the same dependency  |
 | [KT-57609](https://youtrack.jetbrains.com/issue/KT-57609) | K2: Stop relying on the presence of @UnsafeVariance using for contravariant parameters                                         |
-| [KT-54316](https://youtrack.jetbrains.com/issue/KT-54316) | Out-of-call reference to companion object's member has invalid signature                                                       |
 | [KT-55111](https://youtrack.jetbrains.com/issue/KT-55111) | OptIn: forbid constructor calls with default arguments under marker                                                            |
-| [KT-33917](https://youtrack.jetbrains.com/issue/KT-33917) | Prohibit to expose anonymous types from private inline functions                                                               |
-| [KT-56408](https://youtrack.jetbrains.com/issue/KT-56408) | Inconsistent rules of CFA in class initialization block between K1 and K2                                                      |
-| [KT-57750](https://youtrack.jetbrains.com/issue/KT-57750) | Report ambiguity error when resolving types and having the same-named classes star imported                                    |
-| [KT-49404](https://youtrack.jetbrains.com/issue/KT-49404) | Fix type unsoundness for contravariant captured type based on Java class                                                       |
-| [KT-22379](https://youtrack.jetbrains.com/issue/KT-22379) | Condition of while-loop with break can produce unsound smartcast                                                               |
-| [KT-53752](https://youtrack.jetbrains.com/issue/KT-53752) | Missed subtyping check for an intersection type                                                                                |
-| [KT-52628](https://youtrack.jetbrains.com/issue/KT-52628) | Deprecate SAM constructor usages which require OptIn without annotation                                                        |
-| [KT-54066](https://youtrack.jetbrains.com/issue/KT-54066) | Deprecate upper bound violation in typealias constructors                                                                      |
-| [KT-57011](https://youtrack.jetbrains.com/issue/KT-57011) | Make real type of a destructuring variable consistent with explicit type when specified                                        |
 | [KT-52802](https://youtrack.jetbrains.com/issue/KT-52802) | Report ambiguity resolving between property/field and enum entry                                                               |
 | [KT-58260](https://youtrack.jetbrains.com/issue/KT-58260) | Make invoke convention work consistently with expected desugaring                                                              |
 | [KT-55179](https://youtrack.jetbrains.com/issue/KT-55179) | False negative PRIVATE_CLASS_MEMBER_FROM_INLINE on calling private class companion object member from internal inline function |
@@ -92,7 +320,6 @@ perspective
 | [KT-64299](https://youtrack.jetbrains.com/issue/KT-64299) | Companion scope is ignored for resolution of annotations on companion object                                                   |
 | [KT-47310](https://youtrack.jetbrains.com/issue/KT-47310) | Change qualifier resolution behavior when companion property is preferred against enum entry                                   |
 | [KT-41034](https://youtrack.jetbrains.com/issue/KT-41034) | K2: Change evaluation semantics for combination of safe calls and convention operators                                         |
-| [KT-56545](https://youtrack.jetbrains.com/issue/KT-56545) | Fix incorrect functions mangling in JVM backend in case of accidental clashing overload in a Java subclass                     |
 | [KT-58589](https://youtrack.jetbrains.com/issue/KT-58589) | Deprecate missed MUST_BE_INITIALIZED when no primary constructor is presented or when class is local                           |
 | [KT-61182](https://youtrack.jetbrains.com/issue/KT-61182) | Unit conversion is accidentally allowed to be used for expressions on variables + invoke resolution                            |
 | [KT-62998](https://youtrack.jetbrains.com/issue/KT-62998) | Forbid assignment of a nullable to a not-null Java field as a selector of unsafe assignment                                    |
@@ -103,7 +330,6 @@ perspective
 | [KT-34372](https://youtrack.jetbrains.com/issue/KT-34372) | Report missed error for virtual inline method in enum classes                                                                  |
 | [KT-47986](https://youtrack.jetbrains.com/issue/KT-47986) | Forbid implicit inferring a type variable into an upper bound in the builder inference context                                 |
 | [KT-53982](https://youtrack.jetbrains.com/issue/KT-53982) | Keep nullability when approximating local types in public signatures                                                           |
-| [KT-45375](https://youtrack.jetbrains.com/issue/KT-45375) | Generate all Kotlin lambdas via invokedynamic + LambdaMetafactory by default                                                   |
 | [KT-65776](https://youtrack.jetbrains.com/issue/KT-65776) | [LC] K2 breaks \`false && ...\` and \`false \|\| ...\`                                                                         |
 
 ## Tools
