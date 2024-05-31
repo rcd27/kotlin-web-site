@@ -54,11 +54,13 @@ perspective
 >
 > **Incompatible change type**: source
 >
-> **Short summary**: If you use the synthetic setter of a Java class to assign a type that conflicts with the class's projected type, an error is triggered.
+> **Short summary**: If you use the synthetic setter of a Java class to assign a type that conflicts with the class's
+> projected type, an error is triggered.
 >
 > **Deprecation cycle**:
 >
-> - 1.8.20: report a warning when a synthetic property setter has a projected parameter type in contravariant position making call-site argument types incompatible
+> - 1.8.20: report a warning when a synthetic property setter has a projected parameter type in contravariant position
+>   making call-site argument types incompatible
 > - 2.0.0: raise the warning to an error
 
 ### Correct mangling behavior for duplicate function names in a Java subclass
@@ -71,7 +73,8 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 2.0.0: use the correct mangling behavior in function invocations. To revert to previous behaviour, use compiler option -XXLanguage:-MangleCallsToJavaMethodsWithValueClasses.
+> - 2.0.0: use the correct mangling behavior in function invocations; to revert to the previous behaviour,
+>   use the `-XXLanguage:-MangleCallsToJavaMethodsWithValueClasses` compiler option.
 
 ### Correct type approximation algorithm for types with projections for type arguments
 
@@ -183,7 +186,8 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 1.7.0: report a warning CONFLICTING_INHERITED_MEMBERS_WARNING on declarations where inherited member conflict has occurred in the supertype from binary dependency
+> - 1.7.0: report a warning CONFLICTING_INHERITED_MEMBERS_WARNING on declarations where inherited member conflict has
+>   occurred in the supertype from binary dependency
 > - 2.0.0: raise the warning to an error: CONFLICTING_INHERITED_MEMBERS
 
 ### Ignore @UnsafeVariance annotations when reporting errors about type mismatch in contravariant parameters
@@ -211,7 +215,7 @@ perspective
 > - 1.8.20: report a warning on a companion object function reference type inferred as an unbound reference
 > - 2.0.0: change the behavior so that companion object function references are inferred as bound references in all usage contexts
 
-### Require Opt in when calling a constructor that has parameter types that require an Opt in
+### Prohibit exposure of anonymous types from private inline functions
 
 > **Issue**: [KT-33917](https://youtrack.jetbrains.com/issue/KT-33917)
 >
@@ -222,7 +226,7 @@ perspective
 > **Deprecation cycle**:
 >
 > - 1.3.0: report a warning on calls to own members of anonymous objects, returned from private inline functions
-> - 2.0.0: approximate return type of such private inline functions to a supertype and don't resolve calls to anonymous object members.
+> - 2.0.0: approximate return type of such private inline functions to a supertype and don't resolve calls to anonymous object members
 
 ### Report error for an unsound smart cast after a while-loop break
 
@@ -234,9 +238,7 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 2.0.0: implement new behavior
->
-> The old behavior can be restored by switching to language version 1.9.
+> - 2.0.0: implement new behavior; the old behavior can be restored by switching to language version 1.9
 
 ### Report error when a variable of an intersection type is assigned a value that is not a subtype of that intersection type
 
@@ -250,7 +252,7 @@ perspective
 >
 > - 2.0.0: report an error when a variable having an intersection type is assigned a value that is not a subtype of that intersection type
 
-### Deprecate SAM constructor usages which require OptIn without annotation
+### Deprecate SAM constructor usages which require opt-in without annotation
 
 > **Issue**: [KT-52628](https://youtrack.jetbrains.com/issue/KT-52628)
 >
@@ -260,8 +262,9 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 1.7.20: report a warning for OptIn usages via SAM constructor, the warning in this case is never promoted to an error
-> - 2.0.0:  raise the warning to an error in K2 compiler for OptIn usages via SAM constructor (or keep reporting the warning if OptIn marker severity is a warning)
+> - 1.7.20: report a warning for `OptIn` usages via SAM constructor
+> - 2.0.0: raise the warning to an error for `OptIn` usages via SAM constructor (or keep reporting the warning if `OptIn`
+>   marker severity is a warning)
 
 ### Deprecate upper bound violation in typealias constructors
 
@@ -273,10 +276,10 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 1.8.0: introduce a warning, this warning never becomes an error
-> - 2.0.0: raise the warning to an error in K2 compiler
+> - 1.8.0: introduce a warning for cases when the upper bound is violated in typealias constructors
+> - 2.0.0: raise the warning to an error in the K2 compiler
 
-### Make the real type of a destructuring variable consistent with the explicit type when specified
+### Make the real type of destructuring variable consistent with the explicit type when specified
 
 > **Issue**: [KT-57011](https://youtrack.jetbrains.com/issue/KT-57011)
 >
@@ -288,49 +291,312 @@ perspective
 >
 > - 2.0.0: implement new behavior
 
-### Title
+### Change overload resolution behavior to prioritize function calls over invoke conventions
 
-> **Issue**: [KT-NNNNN](https://youtrack.jetbrains.com/issue/KT-NNNNN)
+> **Issue**: [KT-37592](https://youtrack.jetbrains.com/issue/KT-37592)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: behavioral
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: new overload resolution behavior; function calls are preferred over extension functions
+
+### Ignore @UnsafeVariance annotations when reporting errors about type mismatch in contravariant parameters
+
+> **Issue**: [KT-57609](https://youtrack.jetbrains.com/issue/KT-57609)
 >
 > **Component**: Core language
 >
 > **Incompatible change type**: source
 >
-> **Short summary**:
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior
+
+### Require opt-in when calling a constructor that has opt-in parameter types
+
+> **Issue**: [KT-55111](https://youtrack.jetbrains.com/issue/KT-55111)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
 >
 > **Deprecation cycle**:
 >
-> - 1.6.20: report a warning
-> - 1.8.0: raise the warning to an error
+> - 1.8.20: report a warning on constructor calls that has parameter types which require opt-in
+> - 2.0.0: raise the warning to an error (or keep reporting a warning if the `OptIn` marker severity is a warning)
 
-### Other language changes {initial-collapse-state="expanded"}
+### Report ambiguity between a property and an enum entry with the same name at the same scope level
 
-| Issue ID                                                  | Title                                                                                                                          |
-|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| [KT-37592](https://youtrack.jetbrains.com/issue/KT-37592) | Property invoke of a functional type with receiver is preferred over extension function invoke                                 |
-| [KT-57609](https://youtrack.jetbrains.com/issue/KT-57609) | K2: Stop relying on the presence of @UnsafeVariance using for contravariant parameters                                         |
-| [KT-55111](https://youtrack.jetbrains.com/issue/KT-55111) | OptIn: forbid constructor calls with default arguments under marker                                                            |
-| [KT-52802](https://youtrack.jetbrains.com/issue/KT-52802) | Report ambiguity resolving between property/field and enum entry                                                               |
-| [KT-58260](https://youtrack.jetbrains.com/issue/KT-58260) | Make invoke convention work consistently with expected desugaring                                                              |
-| [KT-55179](https://youtrack.jetbrains.com/issue/KT-55179) | False negative PRIVATE_CLASS_MEMBER_FROM_INLINE on calling private class companion object member from internal inline function |
-| [KT-54663](https://youtrack.jetbrains.com/issue/KT-54663) | Projected types don't take into account in-place not null types                                                                |
-| [KT-57178](https://youtrack.jetbrains.com/issue/KT-57178) | Change inferred type of prefix increment to return type of getter instead of return type of inc() operator                     |
-| [KT-61749](https://youtrack.jetbrains.com/issue/KT-61749) | Forbid unsound bound violation in generic inner class of generic outer class                                                   |
-| [KT-64342](https://youtrack.jetbrains.com/issue/KT-64342) | SAM conversion of parameter types of callable references leads to CCE                                                          |
-| [KT-64299](https://youtrack.jetbrains.com/issue/KT-64299) | Companion scope is ignored for resolution of annotations on companion object                                                   |
-| [KT-47310](https://youtrack.jetbrains.com/issue/KT-47310) | Change qualifier resolution behavior when companion property is preferred against enum entry                                   |
-| [KT-41034](https://youtrack.jetbrains.com/issue/KT-41034) | K2: Change evaluation semantics for combination of safe calls and convention operators                                         |
-| [KT-58589](https://youtrack.jetbrains.com/issue/KT-58589) | Deprecate missed MUST_BE_INITIALIZED when no primary constructor is presented or when class is local                           |
-| [KT-61182](https://youtrack.jetbrains.com/issue/KT-61182) | Unit conversion is accidentally allowed to be used for expressions on variables + invoke resolution                            |
-| [KT-62998](https://youtrack.jetbrains.com/issue/KT-62998) | Forbid assignment of a nullable to a not-null Java field as a selector of unsafe assignment                                    |
-| [KT-57600](https://youtrack.jetbrains.com/issue/KT-57600) | Forbid overriding of Java method with raw-typed parameter with generic typed parameter                                         |
-| [KT-47313](https://youtrack.jetbrains.com/issue/KT-47313) | Change (V)::foo reference resolution when V has a companion                                                                    |
-| [KT-54997](https://youtrack.jetbrains.com/issue/KT-54997) | Forbid implicit non-public-API accesses from public-API inline function                                                        |
-| [KT-57422](https://youtrack.jetbrains.com/issue/KT-57422) | K2: Prohibit use-site 'get' targeted annotations on property getters                                                           |
-| [KT-34372](https://youtrack.jetbrains.com/issue/KT-34372) | Report missed error for virtual inline method in enum classes                                                                  |
-| [KT-47986](https://youtrack.jetbrains.com/issue/KT-47986) | Forbid implicit inferring a type variable into an upper bound in the builder inference context                                 |
-| [KT-53982](https://youtrack.jetbrains.com/issue/KT-53982) | Keep nullability when approximating local types in public signatures                                                           |
-| [KT-65776](https://youtrack.jetbrains.com/issue/KT-65776) | [LC] K2 breaks \`false && ...\` and \`false \|\| ...\`                                                                         |
+> **Issue**: [KT-52802](https://youtrack.jetbrains.com/issue/KT-52802)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.7.20: report a warning when the compiler resolves to a property instead of an enum entry at the same scope level
+> - 2.0.0: report ambiguity when the compiler encounters both a property and an enum entry with the same name at the same
+>   scope level in the K2 compiler (leaving the warning as is in the old compiler)
+
+### Resolve invoke call receiver type and the invoke function type as if written in desugared form
+
+> **Issue**: [KT-58260](https://youtrack.jetbrains.com/issue/KT-58260)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: resolve invoke call receiver type and the invoke function type independently as if they were written in a desugared form
+
+### Resolve false negative on calling private class companion object member from internal inline functions
+
+> **Issue**: [KT-55179](https://youtrack.jetbrains.com/issue/KT-55179)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.9.0: report the `PRIVATE_CLASS_MEMBER_FROM_INLINE_WARNING` warning when calling private class companion object
+>   member from internal inline functions
+> - 2.0.0: raise this warning to the `PRIVATE_CLASS_MEMBER_FROM_INLINE` error
+
+### Forbid projected types from ignoring in-place not-null types
+
+> **Issue**: [KT-54663](https://youtrack.jetbrains.com/issue/KT-54663)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior; projected types take into account all in-place not-null types
+
+### Change inferred type of prefix increment to match getter's return type
+
+> **Issue**: [KT-57178](https://youtrack.jetbrains.com/issue/KT-57178)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior; inferred type of prefix increment is changed to match getter's return type instead of
+>   the `inc()` operator's return type
+
+### Enforce bound checks for generic inner classes in generic outer classes
+
+> **Issue**: [KT-61749](https://youtrack.jetbrains.com/issue/KT-61749)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: report an error when upper bound of the type parameter of a generic inner superclass is violated
+
+### Forbid callable references with SAM types when the expected type is function type with function type parameter
+
+> **Issue**: [KT-64342](https://youtrack.jetbrains.com/issue/KT-64342)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: report a compilation error on callable references with SAM types when the expected type is a function type
+>   with a function type parameter
+
+### Consider companion object scope for annotation resolution on companion objects
+
+> **Issue**: [KT-64299](https://youtrack.jetbrains.com/issue/KT-64299)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: behavioral
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior; the companion object scope is now not ignored during annotation resolution on companion objects
+
+### Change qualifier resolution behavior to prefer companion property over enum entry
+
+> **Issue**: [KT-47310](https://youtrack.jetbrains.com/issue/KT-47310)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new resolution behavior; companion property is preferred over enum entry
+
+### Improve behavior of safe calls with other operators
+
+> **Issue**: [KT-41034](https://youtrack.jetbrains.com/issue/KT-41034)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: behavioral
+>
+> **Deprecation cycle**:
+>
+> - 1.4.0: report warnings on each incorrect call
+> - 2.0.0: implement new resolution behavior
+
+### Ensure primary constructor is always initialized
+
+> **Issue**: [KT-58589](https://youtrack.jetbrains.com/issue/KT-58589)
+> 
+> **Component**: Core language
+>
+> **Incompatible change type**: behavioral
+>
+> **Deprecation cycle**:
+>
+> - 1.9.20: introduce thr `MUST_BE_INITIALIZED` warning for cases where there is no primary constructor
+> - 2.0.0: raise the warning to an error
+
+### Prohibit Unit conversion of arbitrary expression on variable and invoke resolution
+
+> **Issue**: [KT-61182](https://youtrack.jetbrains.com/issue/KT-61182)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: behavioral
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: report to an error when Unit conversion is applied to an arbitrary expression on variable and invoke resolution
+
+### Forbid nullable assignment to non-null Java fields
+
+> **Issue**: [KT-62998](https://youtrack.jetbrains.com/issue/KT-62998)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: report to an error in case a nullable is assigned to a non-null Java field
+
+### Forbid overriding for raw type parameters
+
+> **Issue**: [KT-57600](https://youtrack.jetbrains.com/issue/KT-57600)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior; overriding is forbidden for raw type parameters
+
+### Change `(V)::foo` reference resolution for companion objects
+
+> **Issue**: [KT-47313](https://youtrack.jetbrains.com/issue/KT-47313)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: behavioral
+>
+> **Deprecation cycle**:
+>
+> - 1.6.0: report a warning on callable references currently bound to companion object instances
+> - 2.0.0: implement new behavior; adding parentheses around a type no longer makes it a reference to the type's companion
+>   object instance
+
+### Forbid implicit non-public API access in public inline functions
+
+> **Issue**: [KT-54997](https://youtrack.jetbrains.com/issue/KT-54997)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.8.20: report a compilation warning when implicit non-public API is accessed in public inline functions
+> - 2.0.0: raise the warning to an error
+
+### Prohibit use-site `get` annotations on property getters
+
+> **Issue**: [KT-57422](https://youtrack.jetbrains.com/issue/KT-57422)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.9.0: report a warning (an error in the progressive mode) on use-site `get` annotations on getters
+> - 2.0.0: raise the warning to the `INAPPLICABLE_TARGET_ON_PROPERTY` error;
+>   use `-XXLanguage:-ProhibitUseSiteGetTargetAnnotations` to revert to a warning
+
+### Prevent implicit inference of type parameters into upper bounds in builder contexts
+
+> **Issue**: [KT-47986](https://youtrack.jetbrains.com/issue/KT-47986)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.7.20: report a warning (or an error in the progressive mode) when the type parameter for a type argument
+>   cannot be inferred into declared upper bounds
+> - 2.0.0: raise the warning to an error
+
+### Maintain nullability when approximating local types in public signatures
+
+> **Issue**: [KT-53982](https://youtrack.jetbrains.com/issue/KT-53982)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.8.0: flexible types are approximated by flexible supertypes; report a warning when a declaration is inferred to have
+>   a non-nullable type that should be nullable, prompting to specify the type explicitly to avoid NPEs
+> - 2.0.0: nullable types are approximated by nullable supertypes
+
+### Remove special handling for `false && ...` and `false || ...`
+
+> **Issue**: [KT-65776](https://youtrack.jetbrains.com/issue/KT-65776)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 2.0.0: implement new behavior; no special handling for `false && ...` and `false || ...`
+
+### Forbid inline open functions in enums
+
+> **Issue**: [KT-34372](https://youtrack.jetbrains.com/issue/KT-34372)
+>
+> **Component**: Core language
+>
+> **Incompatible change type**: source
+>
+> **Deprecation cycle**:
+>
+> - 1.8.0: report a warning on inline open functions in enums
+> - 2.0.0: raise the warning to an error
 
 ## Tools
 
