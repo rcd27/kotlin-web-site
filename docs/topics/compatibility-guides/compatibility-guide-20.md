@@ -123,7 +123,7 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 2.0.0: implement new behavior
+> - 2.0.0: implement new behavior; lambdas are generated using `invokedynamic` and `LambdaMetafactory` by default
 
 ### Forbid if condition with one branch when an expression is required
 
@@ -135,7 +135,7 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 2.0.0: report an error
+> - 2.0.0: report an error in case the `if` condition has only one branch
 
 ### Prohibit violation of self upper bounds by passing a star-projection of a generic type
 
@@ -174,7 +174,7 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 2.0.0: change overload resolution behavior to consistently prioritize function calls over invoke conventions
+> - 2.0.0: new overload resolution behavior; function calls are consistently prioritized over invoke conventions
 
 ### Report error when an inherited member conflict occurs in supertypes from binary dependencies
 
@@ -190,7 +190,7 @@ perspective
 >   occurred in the supertype from binary dependency
 > - 2.0.0: raise the warning to an error: CONFLICTING_INHERITED_MEMBERS
 
-### Ignore @UnsafeVariance annotations when reporting errors about type mismatch in contravariant parameters
+### Ignore @UnsafeVariance annotation when reporting errors about type mismatch in contravariant parameters
 
 > **Issue**: [KT-57609](https://youtrack.jetbrains.com/issue/KT-57609)
 >
@@ -200,7 +200,8 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 2.0.0: implement new behavior
+> - 2.0.0: implement new behavior; the `@UnsafeVariance` annotation is ignored when reporting errors about type mismatch
+>   in contravariant parameters
 
 ### Report error for out-of-call references to a companion object's member
 
@@ -250,7 +251,8 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 2.0.0: report an error when a variable having an intersection type is assigned a value that is not a subtype of that intersection type
+> - 2.0.0: report an error when a variable having an intersection type is assigned a value that is not a subtype of that
+>   intersection type
 
 ### Deprecate SAM constructor usages which require opt-in without annotation
 
@@ -279,7 +281,7 @@ perspective
 > - 1.8.0: introduce a warning for cases when the upper bound is violated in typealias constructors
 > - 2.0.0: raise the warning to an error in the K2 compiler
 
-### Make the real type of destructuring variable consistent with the explicit type when specified
+### Make the real type of destructuring variable consistent with the specified explicit type 
 
 > **Issue**: [KT-57011](https://youtrack.jetbrains.com/issue/KT-57011)
 >
@@ -289,31 +291,8 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 2.0.0: implement new behavior
-
-### Change overload resolution behavior to prioritize function calls over invoke conventions
-
-> **Issue**: [KT-37592](https://youtrack.jetbrains.com/issue/KT-37592)
->
-> **Component**: Core language
->
-> **Incompatible change type**: behavioral
->
-> **Deprecation cycle**:
->
-> - 2.0.0: new overload resolution behavior; function calls are preferred over extension functions
-
-### Ignore @UnsafeVariance annotations when reporting errors about type mismatch in contravariant parameters
-
-> **Issue**: [KT-57609](https://youtrack.jetbrains.com/issue/KT-57609)
->
-> **Component**: Core language
->
-> **Incompatible change type**: source
->
-> **Deprecation cycle**:
->
-> - 2.0.0: implement new behavior
+> - 2.0.0: implement new behavior; the real type of destructuring variable is now consistent with the explicit type
+>   when specified
 
 ### Require opt-in when calling a constructor that has opt-in parameter types
 
@@ -352,7 +331,8 @@ perspective
 >
 > **Deprecation cycle**:
 >
-> - 2.0.0: resolve invoke call receiver type and the invoke function type independently as if they were written in a desugared form
+> - 2.0.0: resolve invoke call receiver type and the invoke function type independently as if they were written in a
+>   desugared form
 
 ### Resolve false negative on calling private class companion object member from internal inline functions
 
