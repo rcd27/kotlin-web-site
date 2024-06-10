@@ -68,7 +68,7 @@ The complete list of available targets is the following:
     <tr>
         <td rowspan="2">Kotlin/Wasm</td>
         <td><code>wasmJs</code></td>
-        <td>Use it for <a href="wasm-js-interop.md">interoperability with JavaScript</a>.</td>
+        <td>Use it if you plan to run your projects in the JavaScript runtime.</td>
     </tr>
     <tr>
         <td><code>wasmWasi</code></td>
@@ -131,7 +131,7 @@ In any target block, you can use the following declarations:
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | `attributes`        | Attributes used for [disambiguating targets](multiplatform-set-up-targets.md#distinguish-several-targets-for-one-platform) for a single platform. |
 | `preset`            | The preset that the target has been created from, if any.                                                                                         |
-| `platformType`      | Designates the Kotlin platform of this target. Available values: `jvm`, `androidJvm`, `js`, `native`, `common`, `wasmJs`, `wasmWasi`.             |
+| `platformType`      | Designates the Kotlin platform of this target. Available values: `jvm`, `androidJvm`, `js`, `native`, `common`, `wasm`.                           |
 | `artifactsTaskName` | The name of the task that builds the resulting artifacts of this target.                                                                          |
 | `components`        | The components used to setup Gradle publications.                                                                                                 |
 
@@ -159,7 +159,7 @@ kotlin {
 ### Web targets
 
 The `js` block describes the configuration of Kotlin/JS targets, and the `wasmJs` block describes the configuration of
-Kotlin/Wasm targets interoperable with JavaScript. They can contain one of two blocks depending on the target execution
+Kotlin/Wasm targets that run in the JavaScript runtime. They can contain one of two blocks depending on the target execution
 environment:
 
 | **Name**              | **Description**                      | 
@@ -170,12 +170,7 @@ environment:
 Learn more about [configuring Kotlin/JS projects](js-project-setup.md).
 
 A separate `wasmWasi` block describes the configuration of Kotlin/Wasm targets that support the WASI system interface.
-It can contain the following blocks:
-
-| **Name**             | **Description**                                                                                                                | 
-|----------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| [`nodejs`](#node-js) | Configuration of the Node.js target.                                                                                           |
-| `binaries`           | Configuration of binaries to produce: <list><li>`executable` − product executable</li><li>`test` − test executable</li></list> |
+Here, only the [`nodejs`](#node-js) execution environment is available:
 
 ```kotlin
 kotlin {
@@ -185,6 +180,10 @@ kotlin {
     }
 }
 ```
+
+All the web targets, `js`, `wasmJs`, and `wasmWasi`, also support the `binaries.executable()` call. It explicitly
+instructs the Kotlin compiler to emit executable files. For more information, see [Execution environments](js-project-setup.md#execution-environments)
+in the Kotlin/JS documentation.
 
 #### Browser
 
