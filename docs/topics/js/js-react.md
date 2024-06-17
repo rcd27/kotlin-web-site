@@ -1,6 +1,6 @@
 [//]: # (title: Build a web application with React and Kotlin/JS — tutorial)
 
-This tutorial will teach you how to build a browser application with Kotlin/JS and the [React](https://reactjs.org/)
+This tutorial will teach you how to build a browser application with Kotlin/JS and the [React](https://react.dev/)
 framework. You will:
 
 * Complete common tasks associated with building a typical React application.
@@ -162,7 +162,7 @@ fun main() {
 {validate="false"}
 
 * The `render()` function instructs [kotlin-react-dom](https://github.com/JetBrains/kotlin-wrappers/tree/master/kotlin-react-dom)
-  to render the first HTML element inside a [fragment](https://reactjs.org/docs/fragments.html) to the `root` element.
+  to render the first HTML element inside a [fragment](https://react.dev/reference/react/Fragment) to the `root` element.
   This element is a container defined in `src/jsMain/resources/index.html`, which was included in the template.
 * The content is an `<h1>` header and uses a typesafe DSL to render HTML.
 * `h1` is a function that takes a lambda parameter. When you add the `+` sign in front of a string literal,
@@ -177,7 +177,7 @@ When the project recompiles, the browser displays this HTML page:
 
 The Kotlin [wrappers](https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-react/README.md) for React come
 with a [domain-specific language (DSL)](type-safe-builders.md) that makes it possible to write HTML in
-pure Kotlin code. In this way, it's similar to [JSX](https://reactjs.org/docs/introducing-jsx.html) from JavaScript.
+pure Kotlin code. In this way, it's similar to [JSX](https://react.dev/learn/writing-markup-with-jsx) from JavaScript.
 However, with this markup being Kotlin, you get all the benefits of a statically typed language, such as autocomplete or
 type checking.
 
@@ -348,7 +348,7 @@ Feel free to experiment with some other styles. For example, you could change th
 
 ## Design app components
 
-The basic building blocks in React are called _[components](https://reactjs.org/docs/components-and-props.html)_.
+The basic building blocks in React are called _[components](https://react.dev/learn/your-first-component)_.
 Components themselves can also be composed of other, smaller components. By combining components, you build your application.
 If you structure components to be generic and reusable, you'll be able to use them in multiple parts of the app without
 duplicating code or logic.
@@ -396,7 +396,7 @@ To start creating the application's structure, first explicitly specify `App`, t
    }
    ```
    
-   The `FC` function creates a [function component](https://reactjs.org/docs/components-and-props.html#function-and-class-components).
+   The `FC` function creates a [function component](https://react.dev/learn/your-first-component#defining-a-component).
 
 3. In the `Main.kt` file, update the `main()` function as follows:
 
@@ -409,7 +409,7 @@ To start creating the application's structure, first explicitly specify `App`, t
 
    Now the program creates an instance of the `App` component and renders it to the specified container.
 
-For more information about React concepts, see the [documentation and guides](https://reactjs.org/docs/hello-world.html#how-to-read-this-guide).
+For more information about React concepts, see the [documentation and guides](https://react.dev/learn).
 
 ### Extract a list component
 
@@ -493,7 +493,7 @@ that holds all the props which can be passed to a `VideoList` component:
 
    The `key` attribute helps the React renderer figure out what to do when the value of `props.videos` changes. It uses
    the key to determine which parts of a list need to be refreshed and which ones stay the same. You can find more information
-   about lists and keys in the [React guide](https://reactjs.org/docs/lists-and-keys.html).
+   about lists and keys in the [React guide](https://react.dev/learn/rendering-lists).
 
 3. In the `App` component, make sure that the child components are instantiated with the proper attributes. In `App.kt`,
    replace the two loops underneath the `h3` elements with an invocation of `VideoList` together with the attributes for
@@ -554,7 +554,7 @@ Instead of just alerting the user, you can add some functionality for highlighti
 To do that, introduce some _state_ specific to this component.
 
 State is one of the core concepts in React. In modern React (which uses the so-called _Hooks API_),
-state is expressed using the [`useState` hook](https://reactjs.org/docs/hooks-state.html).
+state is expressed using the [`useState` hook](https://react.dev/reference/react/useState).
 
 1. Add the following code to the top of the `VideoList` declaration:
 
@@ -574,7 +574,7 @@ state is expressed using the [`useState` hook](https://reactjs.org/docs/hooks-st
      Like with any other variable, you read and write values. The implementation behind `useState()` takes care of the machinery
      required to make state work.
 
-   To learn more about the State Hook, check out the [React documentation](https://reactjs.org/docs/hooks-state.html).
+   To learn more about the State Hook, check out the [React documentation](https://react.dev/learn/state-a-components-memory).
 
 2. Change the `onClick` handler and the text in the `VideoList` component to look as follows:
 
@@ -1161,7 +1161,7 @@ functionality provided by Kotlin's coroutines:
 
    * The [`MainScope()`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-scope.html)
      is a part of Kotlin's structured concurrency model and creates the scope for asynchronous tasks to run in.
-   * `useEffectOnce` is another React _hook_ (specifically, a simplified version of the [useEffect](https://reactjs.org/docs/hooks-effect.html) hook).
+   * `useEffectOnce` is another React _hook_ (specifically, a simplified version of the [useEffect](https://react.dev/reference/react/useEffect) hook).
      It indicates that the component performs a _side effect_. It doesn't just render itself but also communicates over
      the network.
 
